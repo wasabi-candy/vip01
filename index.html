@@ -1,1 +1,22 @@
-test
+<style>
+#vip{
+	position:absolute;
+	background:gray;
+	padding:30px;
+}
+</style>
+
+<div id="vip">box</div>
+
+<script>
+;(function(){
+	var obj = document.getElementById("vip");
+	var i = 0;
+	function loop(){
+		i+=0.1;
+		obj.style.marginLeft=i+"px";
+		setTimeout(loop,10);
+	}
+	loop();
+ })();
+</script>
