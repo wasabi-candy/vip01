@@ -8,7 +8,10 @@ window.onload = function(){
 
 	//実際に計算するところ
 	function calculation(){
-		if(sym == 1){
+
+		if(calc == 0){
+			calc = Number(temp);
+		}else if(sym == 1){
 			calc += Number(temp);
 		}else if(sym == 2){
 			calc -= Number(temp);
@@ -25,37 +28,34 @@ window.onload = function(){
 			document.getElementById("num"+i).onclick = function(){
 				temp = Number(display.innerHTML);
 				if(temp === 0 || on_symbol){
-					on_symbol = false;
 					temp = a+"";
 				}else{
 					temp += a+"";
 				}
-				if(calc == 0){
-					calc = Number(temp);
-				}
 				display.innerHTML = temp;
+				on_symbol = false;
 			}
 		})(i);
 	}
 
 	//四則演算の記号
 	document.getElementById("add").onclick = function(){
-		calculation();
+		if(!on_symbol)calculation();
 		sym = 1;
 		on_symbol = true;
 	}
 	document.getElementById("sub").onclick = function(){
-		calculation();
+		if(!on_symbol)calculation();
 		sym = 2;
 		on_symbol = true;
 	}
 	document.getElementById("mul").onclick = function(){
-		calculation();
+		if(!on_symbol)calculation();
 		sym = 3;
 		on_symbol = true;
 	}
 	document.getElementById("div").onclick = function(){
-		calculation();
+		if(!on_symbol)calculation();
 		sym = 4;
 		on_symbol = true;
 	}
