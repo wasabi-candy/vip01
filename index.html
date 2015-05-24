@@ -14,12 +14,20 @@
 	var i = 0;
 	function loop(){
 		i+=0.5;
-		obj.style.marginLeft=i+"px";
-		obj.style.marginTop=i+"px";
 
-		if(i<800){
-			setTimeout(loop,1);
+		if(i<400){
+			obj.style.marginLeft=i+"px";
 		}
+		if(i>400 && i<800){
+			obj.style.marginTop=i-400+"px";
+		}
+		if(i>800 && i<1200){
+			obj.style.marginLeft=-(i-800)+"px";
+		}
+
+
+		setTimeout(loop,1);
+
 	}
 	loop();
  })();
