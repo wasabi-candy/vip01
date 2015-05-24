@@ -14,14 +14,27 @@
 #symbol,#number{
 	margin-top:40px;
 	height:500px;
+	background:#ccc;
 }
 #symbol{
 	background:#ccc;
 	width:100px;
 	float:right;
 }
+#symbol div{
+	background:#aaa;
+	height:75px;
+	width:70px;
+	margin-left:15px;
+	margin-top:29px;
+	cursor:pointer;
+	font-size:50px;
+	text-align:center;
+	padding-top:15px;
+}
+
+
 #number{
-	background:#ccc;
 	width:380px;
 	float:left;
 }
@@ -40,3 +53,4 @@
 #number div#num0{
 	width:324px;
 }
+
