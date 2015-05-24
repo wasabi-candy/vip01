@@ -33,7 +33,6 @@
 	padding-top:15px;
 }
 
-
 #number{
 	width:380px;
 	float:left;
@@ -49,4 +48,11 @@
 	font-size:50px;
 	text-align:center;
 	padding-top:15px;
+}
+
+#symbol div:hover,#number div:hover{
+	background:#999;
+}
+#symbol div:active,#number div:active{
+	background:#777;
 }
