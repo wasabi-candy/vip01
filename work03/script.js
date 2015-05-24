@@ -31,7 +31,7 @@ window.onload = function(){
 					temp += a+"";
 				}
 				if(calc == 0){
-					calc = temp;
+					calc = Number(temp);
 				}
 				display.innerHTML = temp;
 			}
@@ -64,6 +64,11 @@ window.onload = function(){
 	//イコールとクリア
 	document.getElementById("C").onclick = function(){
 		display.innerHTML="0"
+		temp = 0;
+		sym = 0;
+		on_symbol = false;
+		calc = 0;
+
 	}
 	document.getElementById("eq").onclick = function(){
 		calculation();
