@@ -72,6 +72,13 @@ function stop(){
 		nya = 0;
 	}
 }
+function osoi(){
+	for(var i=0;i<3;i++){
+		clearInterval(timer[i]);
+		timer[i] = setInterval(loop1,1000);
+	
+	}
+}
 
 </script>
 
@@ -80,8 +87,9 @@ function stop(){
 	<div id="v2" class="v">1</div>
 	<div id="v3" class="v">1</div>
 	<div id="b" onClick="stop()">●</div>
-
 </div>
+	<p onclick="osoi()">..</p>
+
 
 
 
