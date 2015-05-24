@@ -25,37 +25,39 @@
 }
 </style>
 
-
-<div id="vip">
-	<div id="v1" class="v">1</div>
-	<div id="v2" class="v">2</div>
-	<div id="v3" class="v">3</div>
-	<div id="b" onclick="stop()">●</div>
-
-</div>
-
-
 <script>
-(function(){
-	function stop(){
-		 alert();
-	}
+
+var obj1;
+var obj2;
+var obj3;
+var timer;
+window.onload=function(){
 	
-	var obj1 = document.getElementById("v1");
-	var obj2 = document.getElementById("v2");
-	var obj3 = document.getElementById("v3");
+	obj1 = document.getElementById("v1");
+	obj2 = document.getElementById("v2");
+	obj3 = document.getElementById("v3");
 	
 	function loop(){
 		obj1.innerHTML=Math.floor(Math.random()*10);
 		obj2.innerHTML=Math.floor(Math.random()*10);
 		obj3.innerHTML=Math.floor(Math.random()*10);
-
-		setTimeout(loop,50);
 	}
+	timer = setInterval(loop,20);
+}
 
-	loop();
-
-})()
+function stop(){
+	clearInterval(timer);
+}
 
 </script>
+
+<div id="vip">
+	<div id="v1" class="v">1</div>
+	<div id="v2" class="v">2</div>
+	<div id="v3" class="v">3</div>
+	<div id="b" onClick="stop()">●</div>
+
+</div>
+
+
 
