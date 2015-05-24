@@ -30,6 +30,9 @@
 var obj1;
 var obj2;
 var obj3;
+var loop1;
+var loop2;
+var loop3;
 var timer = new Array(3);
 
 window.onload=function(){
@@ -38,13 +41,13 @@ window.onload=function(){
 	obj2 = document.getElementById("v2");
 	obj3 = document.getElementById("v3");
 	
-	function loop1(){
+	loop1 = function(){
 		obj1.innerHTML=Math.floor(Math.random()*10);
 	}
-	function loop2(){
+	loop2 = function(){
 		obj2.innerHTML=Math.floor(Math.random()*10);
 	}
-	function loop3(){
+	loop3 = function(){
 		obj3.innerHTML=Math.floor(Math.random()*10);
 	}
 
@@ -63,6 +66,10 @@ function stop(){
 		}else{
 			alert("ざんねん・・・");
 		}
+		timer[0] = setInterval(loop1,60);
+		timer[1] = setInterval(loop2,40);
+		timer[2] = setInterval(loop3,20);
+		nya = 0;
 	}
 }
 
