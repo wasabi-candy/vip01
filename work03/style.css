@@ -1,3 +1,27 @@
-.nya{
+#dentaku{
 	background:gray;
+	margin:30px;
+	width:500px;
+	height:600px;
+	padding:20px;
+}
+#window{
+	background:white;
+	height:38px;
+	padding:10px;
+	font-size:35px;
+}
+#symbol,#number{
+	margin-top:40px;
+	height:500px;
+}
+#symbol{
+	background:#ccc;
+	width:100px;
+	float:right;
+}
+#number{
+	background:#ccc;
+	width:380px;
+	float:left;
 }
