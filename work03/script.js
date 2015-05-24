@@ -8,11 +8,21 @@ window.onload = function(){
 
 	var display = document.getElementById("window");
 	for(var i=0;i<10;i++){
-
 		(function(a){
 			document.getElementById("num"+i).onclick = function(){
-				display.innerHTML = a;
+				var temp = display.innerHTML;
+				if(temp == 0){
+					temp = a;
+				}else{
+					temp += a;
+				}
+				display.innerHTML = temp;
 			}
 		})(i);
 	}
+
+	document.getElementById("C").onclick = function(){
+		display.innerHTML="0"
+	}
+	
 }
