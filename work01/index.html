@@ -17,11 +17,11 @@
 
 		if(i<400){
 			obj.style.marginLeft=i+"px";
-		}else if(i>=400 && i<=800){
+		}else if(i<800){
 			obj.style.marginTop=i-400+"px";
-		}else if(i>800 && i<1200){
+		}else if(i<1200){
 			obj.style.marginLeft=(1200-i)+"px";
-		}else if(i>=1200 && i<=1600){
+		}else if(i<1600){
 			obj.style.marginTop=(1600-i)+"px";
 		}else{
 			i=0;
