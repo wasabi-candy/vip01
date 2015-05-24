@@ -74,10 +74,14 @@ function stop(){
 }
 function osoi(){
 	for(var i=0;i<3;i++){
-		clearInterval(timer[i]);
-		timer[i] = setInterval(loop1,1000);
-	
+		clearInterval(timer[i]);	
 	}
+		timer[0] = setInterval(loop1,1000);
+		timer[1] = setInterval(loop2,1000);
+		timer[2] = setInterval(loop3,1000);
+
+
+	nya = 0;
 }
 
 </script>
