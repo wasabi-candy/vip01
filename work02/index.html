@@ -27,61 +27,45 @@
 
 <script>
 
-var obj1;
-var obj2;
-var obj3;
-var loop1;
-var loop2;
-var loop3;
-var timer = new Array(3);
-
-window.onload=function(){
-	
-	obj1 = document.getElementById("v1");
-	obj2 = document.getElementById("v2");
-	obj3 = document.getElementById("v3");
-	
-	loop1 = function(){
-		obj1.innerHTML=Math.floor(Math.random()*10);
-	}
-	loop2 = function(){
-		obj2.innerHTML=Math.floor(Math.random()*10);
-	}
-	loop3 = function(){
-		obj3.innerHTML=Math.floor(Math.random()*10);
-	}
-
-	timer[0] = setInterval(loop1,60);
-	timer[1] = setInterval(loop2,40);
-	timer[2] = setInterval(loop3,20);
-}
-
 var nya = 0;
+var obj = new Array(3);
+var timer = new Array(3);
+var loop = new Array(3);
+
+function start(num){
+	for(var i=0;i<3;i++){
+		timer[i] = setInterval(loop[i],num);
+	}
+}
 function stop(){
 	clearInterval(timer[nya]);
 	nya++;
 	if(nya==3){
-		if(obj1.innerHTML==obj2.innerHTML && obj1.innerHTML==obj3.innerHTML){
+		if(obj[0].innerHTML==obj[1].innerHTML && obj[0].innerHTML==obj[2].innerHTML){
 			alert("おめでと！！！");
 		}else{
 			alert("ざんねん・・・");
 		}
-		timer[0] = setInterval(loop1,60);
-		timer[1] = setInterval(loop2,40);
-		timer[2] = setInterval(loop3,20);
+		start();
 		nya = 0;
 	}
 }
 function osoi(){
 	for(var i=0;i<3;i++){
-		clearInterval(timer[i]);	
+		clearInterval(timer[i]);
 	}
-		timer[0] = setInterval(loop1,1000);
-		timer[1] = setInterval(loop2,1000);
-		timer[2] = setInterval(loop3,1000);
-
-
+	start(800);
 	nya = 0;
+}
+
+window.onload=function(){
+	for(var i=0;i<3;i++){
+		obj[i] = document.getElementById("v"+(i+1));
+	}
+	loop[0] = function(){obj[0].innerHTML=Math.floor(Math.random()*10)};
+	loop[1] = function(){obj[1].innerHTML=Math.floor(Math.random()*10)};
+	loop[2] = function(){obj[2].innerHTML=Math.floor(Math.random()*10)};
+	start();
 }
 
 </script>
