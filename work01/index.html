@@ -1,0 +1,34 @@
+<style>
+#vip{
+	position:absolute;
+	background:gray;
+	padding:30px;
+}
+</style>
+
+<div id="vip" onclick="function(){alert()}">box</div>
+
+<script>
+;(function(){
+	var obj = document.getElementById("vip");
+	var i = 0;
+	function loop(){
+		i+=5;
+
+		if(i<400){
+			obj.style.marginLeft=i+"px";
+		}else if(i>=400 && i<=800){
+			obj.style.marginTop=i-400+"px";
+		}else if(i>800 && i<1200){
+			obj.style.marginLeft=(1200-i)+"px";
+		}else if(i>=1200 && i<=1600){
+			obj.style.marginTop=(1600-i)+"px";
+		}else{
+			i=0;
+		}
+
+		setTimeout(loop,1);
+	}
+	loop();
+ })();
+</script>
