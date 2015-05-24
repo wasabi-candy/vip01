@@ -22,8 +22,15 @@
 			obj.style.marginTop=i-400+"px";
 		}
 		if(i>800 && i<1200){
-			obj.style.marginLeft=-(i-800)+"px";
+			obj.style.marginLeft=(1200-i)+"px";
 		}
+		if(i>1200 && i<1600){
+			obj.style.marginTop=(1600-i)+"px";
+		}
+		if(i>1600){
+			i=0;
+		}
+
 
 
 		setTimeout(loop,1);
