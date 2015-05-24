@@ -57,14 +57,21 @@ var nya = 0;
 function stop(){
 	clearInterval(timer[nya]);
 	nya++;
+	if(nya==3){
+		if(obj1.innerHTML==obj2.innerHTML && obj1.innerHTML==obj3.innerHTML){
+			alert("おめでと！！！");
+		}else{
+			alert("ざんねん・・・");
+		}
+	}
 }
 
 </script>
 
 <div id="vip">
 	<div id="v1" class="v">1</div>
-	<div id="v2" class="v">2</div>
-	<div id="v3" class="v">3</div>
+	<div id="v2" class="v">1</div>
+	<div id="v3" class="v">1</div>
 	<div id="b" onClick="stop()">●</div>
 
 </div>
