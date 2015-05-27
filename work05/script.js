@@ -79,12 +79,11 @@
                     conf_line[materials[i].getY()]++;
                 }
                 //揃ってる行を削除
-                var delete_line = 0;
                 for(var i=29;i>=0;i--){
                     if(conf_line[i]>=5){
+                        var delete_line = 0;
                         for(var j = 0; j<materials.length; j++){
-                            var index;
-                            if(materials[j].getY() == i){
+                            if(materials[j] != -1 && materials[j].getY() == i){
                                 delete_line = i;
                                 tetris.removeChild(materials[j].getObj());
                                 materials[j]=-1;
@@ -93,9 +92,8 @@
                         }
                         //削除したら、その行よりも上のブロックを一段下げる
                         for(var j=0;j<materials.length;j++){
-                            if(materials[j] != -1){
+                            if(materials[j] != -1 && (delete_line > materials[j].getY())){
                                 materials[j].drop();
-                               
                             }
                         }
                     }
