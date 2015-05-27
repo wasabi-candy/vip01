@@ -79,18 +79,28 @@
                     conf_line[materials[i].getY()]++;
                 }
                 //揃ってる行を削除
+                var delete_line = 0;
                 for(var i=29;i>=0;i--){
-                    if(conf_line[i]>=10){
+                    if(conf_line[i]>=5){
                         for(var j = 0; j<materials.length; j++){
                             var index;
                             if(materials[j].getY() == i){
+                                delete_line = i;
                                 tetris.removeChild(materials[j].getObj());
                                 materials[j]=-1;
                                 delflag = true;
                             }
                         }
+                        //削除したら、その行よりも上のブロックを一段下げる
+                        for(var j=0;j<materials.length;j++){
+                            if(materials[j] != -1){
+                                materials[j].drop();
+                               
+                            }
+                        }
                     }
                 }
+
                 if(delflag){
                     //削除した分だけ配列に空きがあるから、詰める！
                     var temp_array = new Array();
@@ -145,6 +155,7 @@
                 }
             }
         })();
+
         //最小ブロックを配列として返すよ
         this.getMaterials = function(){
             return mino_materials;
@@ -159,10 +170,12 @@
             }
             movable();
         }
+
         //落下できるかどうかを返すよ
         this.onFloor = function(){
             return movable_num[0] == 1;
         }
+
         //左に動くよ
         this.left = function(){
             if(movable_num[1] == -1)return 0;
@@ -174,6 +187,7 @@
             }
             movable();
         }
+
         //右に動くよ
         this.right = function(){
             if(movable_num[1] == 1)return 0;
@@ -185,6 +199,7 @@
             }
             movable();
         }
+
         //せつこ・・・それドロップやない・・・ハードドロップや！！！！！
         this.down = function(){
             while(!this.onFloor()){
@@ -194,6 +209,7 @@
             movable();
 
         }
+
         //回すよ
         this.rotation = function(){
             var temp = "";
@@ -207,6 +223,7 @@
             movable_num[1]=0;
             movable();
         }
+
         //二進数のデータ渡したらその通りにブロックを再配置するよ
         //再配置でブロックが外に出るようなら、内側に押し込める
         this.mapping = function(type){
@@ -279,6 +296,10 @@
         this.getY = function(){
             return y;
         }
+        this.drop = function(){
+            y++;
+            mat.style.marginTop = (y*20)+"px";
+       }
     }
 
 })();
