@@ -1,0 +1,16 @@
+*{
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+#btn{
+    position:absolute;
+    padding:10px;
+    background:gray;
+    width:70px;
+    cursor:pointer;
+}
+#btn:hover{
+    background:#aaa;
+}
