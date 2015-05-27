@@ -80,7 +80,7 @@
                 }
                 //揃ってる行を削除
                 for(var i=29;i>=0;i--){
-                    if(conf_line[i]>=5){
+                    if(conf_line[i]>=20){
                         var delete_line = 0;
                         for(var j = 0; j<materials.length; j++){
                             if(materials[j] != -1 && materials[j].getY() == i){
