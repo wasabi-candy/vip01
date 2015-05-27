@@ -45,12 +45,10 @@
             current_mino.rotation();
         }else if(e.keyCode == "37"){
             current_mino.left();
-
         }else if(e.keyCode == "39"){
             current_mino.right();
         }else if(e.keyCode == "40"){
-            current_mino.down();
-
+            alert("にゃん・・・");
         }
     }
 
@@ -86,6 +84,7 @@
         var mino_materials = new Array(4);
         var color = colors[Math.ceil(Math.random()*4)];
         var type = mino_type[Math.ceil(Math.random()*6)];
+        var movable_num = [0,0];
         (function(){
             var c = 0;
             for(var i = 0;i<4;i++){
@@ -101,7 +100,9 @@
                 }
             }
         })();
-
+        this.getMaterials = function(){
+            return mino_materials;
+        }
         this.fall = function(){
             top_position++;
             for(var i=0;i<4;i++){
@@ -110,27 +111,33 @@
             }
         }
         this.onFloor = function(){
-            return false;
+            return movable_num[0];
         }
         this.left = function(){
+            if(movable_num[1] == -1)return 0;
+
             left_position--;
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX()-1,temp.getY());
             }
+            movable();
         }
         this.right = function(){
+            if(movable_num[1] == 1)return 0;
+                
             left_position++;
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX()+1,temp.getY());
             }
+            movable();
         }
         this.rotation = function(){
             var temp = "";
             for(var i = 0;i<4;i++){
-                for(var j = 0;j<4;j++){
-                    temp += type.charAt(j*3+i);
+                for(var j = 4;j>=0;j--){
+                    temp += type.charAt(j*4+i);
                 }
             }
             type = temp;
@@ -148,10 +155,21 @@
 
                 }
             }
-
-
         }
-
+        function movable(){
+            for(var i=0;i<4;i++){
+                if(mino_materials[i].getX() == 0){
+                    movable_num[1] = -1;
+                }else if(mino_materials[i].getX() == 20){
+                    movable_num[1] = 1;
+                }else{
+                    movable_num[1] = 0;
+                }
+                if(mino_materials[i].getY() == 25){
+                    movable_num[0] = 0;
+                }
+            }
+        }
     }
 
     //ミノを作る一番小さなブロックのクラス
