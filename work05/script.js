@@ -115,7 +115,7 @@
         }
         this.left = function(){
             if(movable_num[1] == -1)return 0;
-
+            movable_num[1] = 0;
             left_position--;
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
@@ -125,7 +125,7 @@
         }
         this.right = function(){
             if(movable_num[1] == 1)return 0;
-                
+            movable_num[1] = 0;
             left_position++;
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
@@ -136,13 +136,14 @@
         this.rotation = function(){
             var temp = "";
             for(var i = 0;i<4;i++){
-                for(var j = 4;j>=0;j--){
+                for(var j = 3;j>=0;j--){
                     temp += type.charAt(j*4+i);
                 }
             }
             type = temp;
             mapping(temp);
-            movable_num();
+            movable_num[1]=0;
+            movable();
         }
         function mapping(type){
             var c = 0;
@@ -161,10 +162,8 @@
             for(var i=0;i<4;i++){
                 if(mino_materials[i].getX() == 0){
                     movable_num[1] = -1;
-                }else if(mino_materials[i].getX() == 20){
+                }else if(mino_materials[i].getX() == 19){
                     movable_num[1] = 1;
-                }else{
-                    movable_num[1] = 0;
                 }
                 if(mino_materials[i].getY() == 25){
                     movable_num[0] = 0;
