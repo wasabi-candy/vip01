@@ -1,9 +1,3 @@
-/*
- *  とりあえず、ソースの大枠を書いてみた！
- *  こんな感じでいけるのだろうか！！
- * */
-
-
 (function(){
 
     //新しいミノを作るか、既存のミノを落下させるかの判別用
@@ -21,7 +15,20 @@
     //画面
     var tetris;
 
+    //ミノの色
     var colors = ["#4521faa","#446214","#9052fa","#cc54aa","#78abbc"];
+
+    //ミノの種類
+    var mino_type = [
+        "0100010001000100",
+        "0100010001100000",
+        "0010001001100000",
+        "0000011001100000",
+        "0000011000110000",
+        "0000011011000000",
+        "0000001001110000"
+            ];
+    
 
 
     window.onload = function(){
@@ -56,20 +63,27 @@
 
     //最小ブロックを操作してミノとして振る舞わせるためのクラス
     function Mino(num){
-        var material_num = 4;
         var mino_materials = new Array(4);
         var color = colors[Math.ceil(Math.random()*4)];
+        var type = mino_type[Math.ceil(Math.random()*6)];
         (function(){
-            for(var i = 0;i<material_num;i++){
-                mino_materials[i] = new Material();
-                mino_materials[i].setPoints(150+(i*20),0);
-                mino_materials[i].setColor(color);
-                tetris.appendChild(mino_materials[i].getObj());
+            var c = 0;
+            for(var i = 0;i<4;i++){
+                for(var j = 0;j<4;j++){
+                    if(type.charAt(i*4+j)=='1'){
+                        mino_materials[c] = new Material();
+                        mino_materials[c].setPoints(150+(j*20),i*20);
+                        mino_materials[c].setColor(color);
+                        tetris.appendChild(mino_materials[c].getObj());
+                        c++;
+                    }
+
+                }
             }
         })();
         
         this.fall = function(){
-            for(var i=0;i<material_num;i++){
+            for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX(),temp.getY()+20);
             }
