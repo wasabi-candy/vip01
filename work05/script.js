@@ -1,52 +1,59 @@
+/*
+ *  とりあえず、ソースの大枠を書いてみた！
+ *  こんな感じでいけるのだろうか！！
+ *
+ *
+ * */
+
+
 (function(){
 
+    //新しいミノを作るか、既存のミノを落下させるかの判別用
+    var new_flag = true;
+
+    //落下中のミノ
+    var current_mino;
+
+    //作ったミノたちを入れておく用の配列
+    var minos = new Array();
+
+    //作ったミノの数の記録
+    var counter = 0;
+
+
     window.onload = function(){
-        var num = 0;
-        document.getElementById("btn").onclick = function(){
-            new CreateDiv(num);
-            num++;
-        }
+        //ゲームスタートの合図
+        var timer = setInterval(loop,1000);
     }
 
-    //クラスベース風に書いてみるよ！！
-   function CreateDiv(num){
+    //ゲームのタイマー関数
+    //一秒ごとに実行されるよ！
+    function loop(){
 
-       //プロパティ
-        var num = num;
-        var x = Math.ceil(Math.random()*window.innerHeight-100);
-        var y = Math.ceil(Math.random()*window.innerWidth-100);
-        var text = "object"+num;
-        var on_mouse = false;
-        var id = "box"+num;
-        var me;
+        if(new_flag){
+        //ミノを新しく生成するとき用
+            minos[counter] = new Mino(counter);
+            counter++;
+        }else{
+        //ミノを落下させるとき用
 
-        //即時関数で無理矢理コンストラクタっぽいもの
-       (function(){
-            var style = "position:absolute;padding:10px;width:60px;height:20px;background:#ccc;";
-            style += "border:solid 1px #000;margin-left:"+y+";margin-top:"+x+";cursor:pointer;";
-            me = document.createElement("div");
-            me.setAttribute("id",id);
-            me.setAttribute("style",style);
-            me.innerHTML = text;
-            me.onmousedown = mouseDown;
-            document.body.appendChild(me);
-        })();
-
-        //メソッド
-        function mouseDown(){
-            document.body.onmouseup = mouseUp;
-            document.body.onmousemove = mouseMove;
-            on_mouse = true;
-        }
-        function mouseUp(){
-            on_mouse = false;
-        }
-        function mouseMove(e){
-            if(on_mouse){
-                me.style.marginLeft = (e.clientX-50)+"px";
-                me.style.marginTop = (e.clientY-30)+"px";
-            }
+        
         }
 
+        /*
+         * ここら辺で行を揃ってるか判別して、
+         * 揃ってた行を削除、その分下に詰める
+         * */
+    }
+
+
+    //ミノクラス
+    function Mono(){
+    
+    }
+
+    //ミノを作る一番小さなブロックのクラス
+    function Material(){
+    
     }
 })();
