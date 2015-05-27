@@ -48,7 +48,7 @@
         }else if(e.keyCode == "39"){
             current_mino.right();
         }else if(e.keyCode == "40"){
-            alert("にゃん・・・");
+            current_mino.down();
         }
     }
 
@@ -137,6 +137,13 @@
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX()+1,temp.getY());
+            }
+            movable();
+        }
+        //せつこ・・・それドロップやない・・・ハードドロップや！！！！！
+        this.down = function(){
+            while(!this.onFloor()){
+                this.fall();
             }
             movable();
         }
