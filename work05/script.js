@@ -54,8 +54,9 @@
     //ミノクラス
     function Mino(num){
          var test= new Material();
-         test.setColor(colors[Math.ceil(Math.random()*5)]);
+         test.setColor(colors[Math.ceil(Math.random()*4)]);
          tetris.appendChild(test.getObj());
+
     }
 
     //ミノを作る一番小さなブロックのクラス
@@ -65,7 +66,7 @@
         var y;
         (function(){
             mat = document.createElement("div");
-            mat.setAttribute("style","height:9px;width:9px;border:solid 1px black;");
+            mat.setAttribute("style","height:18px;width:18px;border:solid 1px black;float:left;");
         })();
 
         this.getObj = function(){
