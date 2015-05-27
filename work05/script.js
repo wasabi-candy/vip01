@@ -142,6 +142,7 @@
             }
             type = temp;
             mapping(temp);
+            movable_num();
         }
         function mapping(type){
             var c = 0;
@@ -178,7 +179,7 @@
         var x;
         var y;
         (function(){
-            var style = "position:absolute;height:18px;width:18px;border:solid 1px black;float:left";
+            var style = "position:absolute;height:18px;width:18px;border:solid 1px black;float:left;font-size:8px;text-align:center;";
             mat = document.createElement("div");
             mat.setAttribute("style",style);
         })();
@@ -194,6 +195,7 @@
             y = ty;
             mat.style.marginLeft = (x*20)+"px";
             mat.style.marginTop = (y*20)+"px";
+            mat.innerHTML = x+"."+y;
         }
         this.getX = function(){
             return x;
