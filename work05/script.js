@@ -90,10 +90,11 @@
                                 delflag = true;
                             }
                         }
-                        //削除したら、その行よりも上のブロックを一段下げる
+
+                        //削除したら、その行よりも上のブロックを一段下げる、用意
                         for(var j=0;j<materials.length;j++){
                             if(materials[j] != -1 && (delete_line > materials[j].getY())){
-                                materials[j].drop();
+                                materials[j].drop_flag();
                             }
                         }
                     }
@@ -105,6 +106,7 @@
                     var temp_counter = 0;
                     for(var i=0;i<materials.length;i++){
                         if(materials[i] != -1){
+                            materials[i].drop();
                             temp_array[temp_counter] = materials[i];
                             temp_counter++;
                         }
@@ -269,6 +271,7 @@
         var mat;
         var x;
         var y;
+        var d_flag = false;
         (function(){
             var style = "position:absolute;height:18px;width:18px;border:solid 1px black;float:left;font-size:8px;text-align:center;";
             mat = document.createElement("div");
@@ -294,10 +297,16 @@
         this.getY = function(){
             return y;
         }
+        this.drop_flag = function(){
+            d_flag = true;
+        }
         this.drop = function(){
-            y++;
-            mat.style.marginTop = (y*20)+"px";
-       }
+            if(d_flag){
+                d_flag = false;
+                y++;
+                mat.style.marginTop = (y*20)+"px";
+            }
+        }
     }
 
 })();
