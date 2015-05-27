@@ -36,12 +36,15 @@
 
         if(new_flag){
         //ミノを新しく生成するとき用
+            new_flag = false;
             current_mino = new Mino(counter);
             counter++;
         }else{
         //ミノを落下させるとき用
-
-        
+            current_mino.fall();
+            if(current_mino.onFloor()){
+                new_flag = true;
+            }
         }
 
         /*
@@ -51,11 +54,29 @@
     }
 
 
-    //ミノクラス
+    //最小ブロックを操作してミノとして振る舞わせるためのクラス
     function Mino(num){
-         var test= new Material();
-         test.setColor(colors[Math.ceil(Math.random()*4)]);
-         tetris.appendChild(test.getObj());
+        var material_num = 4;
+        var mino_materials = new Array(4);
+        var color = colors[Math.ceil(Math.random()*4)];
+        (function(){
+            for(var i = 0;i<material_num;i++){
+                mino_materials[i] = new Material();
+                mino_materials[i].setPoints(150+(i*20),0);
+                mino_materials[i].setColor(color);
+                tetris.appendChild(mino_materials[i].getObj());
+            }
+        })();
+        
+        this.fall = function(){
+            for(var i=0;i<material_num;i++){
+                var temp = mino_materials[i];
+                temp.setPoints(temp.getX(),temp.getY()+20);
+            }
+        }
+        this.onFloor = function(){
+            return false;
+        }
 
     }
 
@@ -65,8 +86,9 @@
         var x;
         var y;
         (function(){
+            var style = "position:absolute;height:18px;width:18px;border:solid 1px black;float:left";
             mat = document.createElement("div");
-            mat.setAttribute("style","height:18px;width:18px;border:solid 1px black;float:left;");
+            mat.setAttribute("style",style);
         })();
 
         this.getObj = function(){
@@ -74,6 +96,18 @@
         }
         this.setColor = function(color){
             mat.style.backgroundColor=color;
+        }
+        this.setPoints = function(tx,ty){
+            x = tx;
+            y = ty;
+            mat.style.marginLeft = x+"px";
+            mat.style.marginTop = y+"px";
+        }
+        this.getX = function(){
+            return x;
+        }
+        this.getY = function(){
+            return y;
         }
     }
 
