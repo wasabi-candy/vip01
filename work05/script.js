@@ -158,22 +158,34 @@
                 }
             }
             type = temp;
-            mapping(temp);
+            this.mapping(temp);
             movable_num[1]=0;
             movable();
         }
         //二進数のデータ渡したらその通りにブロックを再配置するよ
-        function mapping(type){
+        //再配置でブロックが外に出るようなら、内側に押し込める
+        this.mapping = function(type){
             var c = 0;
+            var f = 0;
             for(var i = 0;i<4;i++){
                 for(var j = 0;j<4;j++){
                     if(type.charAt(i*4+j)=='1'){
                         var temp = mino_materials[c];
                         temp.setPoints(left_position+j,top_position+i);
                         c++;
+                        if(temp.getX() < 0){
+                            f = -1;
+                        }else if(temp.getX() > 19){
+                            f = 1;
+                        }
                     }
 
                 }
+            }
+            if(f == -1){
+                this.right();
+            }else if(f == 1){
+                this.left();
             }
         }
         
