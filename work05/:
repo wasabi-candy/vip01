@@ -19,13 +19,10 @@
     var counter = 0;
 
     //画面
-    var tetris;
-
-    var colors = ["#4521faa","#446214","#9052fa","#cc54aa","#78abbc"];
+    var tetris = document.getElementById("tetris");
 
 
     window.onload = function(){
-        tetris = document.getElementById("tetris");
         //ゲームスタートの合図
         var timer = setInterval(loop,1000);
     }
@@ -52,10 +49,8 @@
 
 
     //ミノクラス
-    function Mino(num){
-         var test= new Material();
-         test.setColor(colors[Math.ceil(Math.random()*5)]);
-         tetris.appendChild(test.getObj());
+    function Mono(){
+         tetris.appendChild();
     }
 
     //ミノを作る一番小さなブロックのクラス
@@ -65,15 +60,12 @@
         var y;
         (function(){
             mat = document.createElement("div");
-            mat.setAttribute("style","height:9px;width:9px;border:solid 1px black;");
+            mat.Attribute("style","height:9px;width:9px;border:solid 1px black;");
         })();
-
-        this.getObj = function(){
-            return mat;
-        }
-        this.setColor = function(color){
-            mat.style.backgroundColor=color;
-        }
     }
 
+    tetris.prototype.add = function(){
+        alert();
+    }
+    tetris.add();
 })();
