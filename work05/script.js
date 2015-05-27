@@ -145,7 +145,9 @@
             while(!this.onFloor()){
                 this.fall();
             }
+            new_flag = true;
             movable();
+
         }
         //回すよ
         this.rotation = function(){
