@@ -100,19 +100,25 @@
                 }
             }
         })();
+        //最小ブロックを配列として返すよ
         this.getMaterials = function(){
             return mino_materials;
         }
+        //落下させるよ
         this.fall = function(){
+            movable_num[0] = 0;
             top_position++;
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX(),temp.getY()+1);
             }
+            movable();
         }
+        //落下できるかどうかを返すよ
         this.onFloor = function(){
-            return movable_num[0];
+            return movable_num[0] == 1;
         }
+        //左に動くよ
         this.left = function(){
             if(movable_num[1] == -1)return 0;
             movable_num[1] = 0;
@@ -123,6 +129,7 @@
             }
             movable();
         }
+        //右に動くよ
         this.right = function(){
             if(movable_num[1] == 1)return 0;
             movable_num[1] = 0;
@@ -133,6 +140,7 @@
             }
             movable();
         }
+        //回すよ
         this.rotation = function(){
             var temp = "";
             for(var i = 0;i<4;i++){
@@ -145,6 +153,7 @@
             movable_num[1]=0;
             movable();
         }
+        //二進数のデータ渡したらその通りにブロックを再配置するよ
         function mapping(type){
             var c = 0;
             for(var i = 0;i<4;i++){
@@ -158,15 +167,17 @@
                 }
             }
         }
+        
+        //ミノが動けるかどうか判断
         function movable(){
             for(var i=0;i<4;i++){
-                if(mino_materials[i].getX() == 0){
+                if(mino_materials[i].getX() <= 0){
                     movable_num[1] = -1;
-                }else if(mino_materials[i].getX() == 19){
+                }else if(mino_materials[i].getX() >= 19){
                     movable_num[1] = 1;
                 }
-                if(mino_materials[i].getY() == 25){
-                    movable_num[0] = 0;
+                if(mino_materials[i].getY() > 28){
+                    movable_num[0] = 1;
                 }
             }
         }
