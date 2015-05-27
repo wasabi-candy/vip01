@@ -168,7 +168,22 @@
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX(),temp.getY()+1);
             }
+            this.hit();
             movable();
+        }
+
+        //あたり判定
+        this.hit = function(){
+            var testtest = 0;
+            for(var i=0;i<counter;i++){
+                testtest++;
+                console.log(testtest);
+                for(var j=0;j<4;j++){
+                    if(materials[i].getY() == mino_materials[j].getY()+1){
+                        movable_num[0] = 1;
+                    }
+                }
+            }
         }
 
         //落下できるかどうかを返すよ
@@ -205,6 +220,7 @@
             while(!this.onFloor()){
                 this.fall();
             }
+            movable_num[0] = 0;
             new_flag = true;
             movable();
 
