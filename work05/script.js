@@ -180,7 +180,11 @@
                 console.log(testtest);
                 for(var j=0;j<4;j++){
                     if(materials[i].getY() == mino_materials[j].getY()+1){
-                        movable_num[0] = 1;
+                        if(materials[i].getX() == mino_materials[j].getX()+1 || materials[i].getX() == mino_materials[j].getX()-1){
+                            movable_num[0] = 1;
+                        }else{
+                            movable_num[0] = 0;
+                        }
                     }
                 }
             }
@@ -289,7 +293,7 @@
         var y;
         var d_flag = false;
         (function(){
-            var style = "position:absolute;height:18px;width:18px;border:solid 1px black;float:left;font-size:8px;text-align:center;";
+            var style = "position:absolute;height:18px;width:18px;border:solid 1px black;float:left;";
             mat = document.createElement("div");
             mat.setAttribute("style",style);
         })();
@@ -305,7 +309,6 @@
             y = ty;
             mat.style.marginLeft = (x*20)+"px";
             mat.style.marginTop = (y*20)+"px";
-            mat.innerHTML = x+"."+y;
         }
         this.getX = function(){
             return x;
