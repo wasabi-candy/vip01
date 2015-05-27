@@ -1,0 +1,12 @@
+*{
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+#tetris{
+    background:#ddd;
+    height:600px;
+    width:400px;
+    margin:30px;
+}
