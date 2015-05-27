@@ -15,6 +15,8 @@
     //画面
     var tetris;
 
+    var conf_line = new Array(30);
+
     //ミノの色
     var colors = ["#4521faa","#446214","#9052fa","#cc54aa","#78abbc"];
 
@@ -57,22 +59,59 @@
     function loop(){
 
         if(new_flag){
-            //ミノを新しく生成するとき用
+            //行の削除とミノを新しく生成するとき用
+
+            if(current_mino != void 0){
+                var mate_temp = current_mino.getMaterials();
+                //ドロップしたミノを分解して配列に格納
+                for(var i=0;i<4;i++){
+                    materials[counter] = mate_temp[i];
+                    counter++;
+                }
+                //確認用の配列を０で初期化
+                for(var i=0;i<30;i++){
+                    conf_line[i] = 0;
+                }
+                //揃っている行があるか、確認
+                for(var i=0;i<counter;i++){
+                    conf_line[materials[i].getY()]++;
+                }
+                //揃ってる行を削除
+                for(var i=0;i<30;i++){
+                    if(conf_line[i]>=10){
+                        for(var j = 0; j<counter; j++){
+                            if(materials[j].getY() == conf_line[i]){
+                                tetris.removeChild(materials[j].getObj());
+                                delete materials[j];
+                            }
+                        }
+                    }
+                }
+                //削除した分だけ配列に空きがあるから、詰める！
+                var temp_array = new Array();
+                var temp_counter = 0;
+                for(var i=0;i<materials.length;i++){
+                    if(materials[i] != void 0){
+                        temp_array[temp_counter] = materials[i];
+                        temp_counter++;
+                    }
+                }
+                materials = temp_array.concat();
+                counter = materials.length;
+
+            }
+            //新しいミノを生成
             new_flag = false;
             current_mino = new Mino(counter);
-            counter++;
+
         }else{
+
             //ミノを落下させるとき用
             current_mino.fall();
             if(current_mino.onFloor()){
                 new_flag = true;
             }
         }
-
-        /*
-         * ここら辺で行を揃ってるか判別して、
-         * 揃ってた行を削除、その分下に詰める
-         * */
     }
 
 
@@ -188,7 +227,7 @@
                 this.left();
             }
         }
-        
+
         //ミノが動けるかどうか判断
         function movable(){
             for(var i=0;i<4;i++){
