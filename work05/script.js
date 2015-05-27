@@ -62,6 +62,8 @@
             //行の削除とミノを新しく生成するとき用
 
             if(current_mino != void 0){
+                var delflag = false;//行を削除したかどうか
+
                 var mate_temp = current_mino.getMaterials();
                 //ドロップしたミノを分解して配列に格納
                 for(var i=0;i<4;i++){
@@ -73,31 +75,36 @@
                     conf_line[i] = 0;
                 }
                 //揃っている行があるか、確認
-                for(var i=0;i<counter;i++){
+                for(var i=0;i<materials.length;i++){
                     conf_line[materials[i].getY()]++;
                 }
                 //揃ってる行を削除
-                for(var i=0;i<30;i++){
+                for(var i=29;i>=0;i--){
                     if(conf_line[i]>=10){
-                        for(var j = 0; j<counter; j++){
-                            if(materials[j].getY() == conf_line[i]){
+                        for(var j = 0; j<materials.length; j++){
+                            var index;
+                            if(materials[j].getY() == i){
                                 tetris.removeChild(materials[j].getObj());
-                                delete materials[j];
+                                materials[j]=-1;
+                                delflag = true;
                             }
                         }
                     }
                 }
-                //削除した分だけ配列に空きがあるから、詰める！
-                var temp_array = new Array();
-                var temp_counter = 0;
-                for(var i=0;i<materials.length;i++){
-                    if(materials[i] != void 0){
-                        temp_array[temp_counter] = materials[i];
-                        temp_counter++;
+                if(delflag){
+                    //削除した分だけ配列に空きがあるから、詰める！
+                    var temp_array = new Array();
+                    var temp_counter = 0;
+                    for(var i=0;i<materials.length;i++){
+                        if(materials[i] != -1){
+                            temp_array[temp_counter] = materials[i];
+                            temp_counter++;
+                        }
                     }
+
+                    materials = temp_array.concat();
+                    counter = materials.length;
                 }
-                materials = temp_array.concat();
-                counter = materials.length;
 
             }
             //新しいミノを生成
@@ -105,7 +112,6 @@
             current_mino = new Mino(counter);
 
         }else{
-
             //ミノを落下させるとき用
             current_mino.fall();
             if(current_mino.onFloor()){
