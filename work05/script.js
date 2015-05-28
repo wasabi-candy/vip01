@@ -174,17 +174,12 @@
 
         //あたり判定
         this.hit = function(){
-            var testtest = 0;
             for(var i=0;i<counter;i++){
-                testtest++;
-                console.log(testtest);
                 for(var j=0;j<4;j++){
-                    if(materials[i].getY() == mino_materials[j].getY()+1){
-                        if(materials[i].getX() == mino_materials[j].getX()+1 || materials[i].getX() == mino_materials[j].getX()-1){
+                    var mat = materials[i];
+                    var m_mate = mino_materials[j];
+                    if(mat.getY() == m_mate.getY()+1 && mat.getX() == m_mate.getX()){
                             movable_num[0] = 1;
-                        }else{
-                            movable_num[0] = 0;
-                        }
                     }
                 }
             }
