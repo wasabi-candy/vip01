@@ -179,13 +179,14 @@
         //落下させるよ
         this.fall = function(){
             movable_num[0] = 0;
+            movable_num[1] = 0;
             top_position++;
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX(),temp.getY()+1);
             }
             this.hit();
-            movable();
+            this.movable();
         }
 
         //あたり判定
@@ -202,7 +203,6 @@
                     }else if(mat.getX() == m_mate.getX()-1 && mat.getY() == m_mate.getY()){
                         movable_num[1] = -1;
                     }else{
-                      //  alert("test")
                       //  movable_num[1] = 0;
                     }
                 }
@@ -224,7 +224,7 @@
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX()-1,temp.getY());
             }
-            movable();
+            this.movable();
         }
 
         //右に動くよ
@@ -237,7 +237,7 @@
                 var temp = mino_materials[i];
                 temp.setPoints(temp.getX()+1,temp.getY());
             }
-            movable();
+            this.movable();
         }
 
         //せつこ・・・それドロップやない・・・ハードドロップや！！！！！
@@ -247,7 +247,7 @@
             }
             movable_num[0] = 0;
             new_flag = true;
-            movable();
+            this.movable();
 
         }
 
@@ -262,7 +262,7 @@
             type = temp;
             this.mapping(temp);
             movable_num[1]=0;
-            movable();
+            this.movable();
         }
 
         //二進数のデータ渡したらその通りにブロックを再配置するよ
@@ -293,7 +293,7 @@
         }
 
         //ミノが動けるかどうか判断
-        function movable(){
+        this.movable = function(){
             for(var i=0;i<4;i++){
                 if(mino_materials[i].getX() <= 0){
                     movable_num[1] = -1;
