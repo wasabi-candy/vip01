@@ -15,6 +15,7 @@
     //画面
     var tetris;
 
+    //揃ってる行があるか確認する用の配列
     var conf_line = new Array(30);
 
     //ミノの色
@@ -138,7 +139,7 @@
         var state = 0;
         var mino_materials = new Array(4);
         var color = colors[Math.ceil(Math.random()*4)];
-        var type = mino_type[Math.ceil(Math.random()*6)];
+        var type = mino_type[Math.ceil(Math.random()*7)-1];
         var movable_num = [0,0];
         (function(){
             var c = 0;
@@ -179,7 +180,14 @@
                     var mat = materials[i];
                     var m_mate = mino_materials[j];
                     if(mat.getY() == m_mate.getY()+1 && mat.getX() == m_mate.getX()){
-                            movable_num[0] = 1;
+                        movable_num[0] = 1;
+                    }
+                    if(mat.getX() == m_mate.getX()+1 && mat.getY() == m_mate.getY()){
+                        movable_num[1] = 1;
+                    }else if(mat.getX() == m_mate.getX()-1 && mat.getY() == m_mate.getY()){
+                        movable_num[1] = -1;
+                    }else{
+                        movable_num[1] = 0;
                     }
                 }
             }
