@@ -135,6 +135,7 @@
         }
     }
 
+    //この関数を呼び出すと、落下中のミノを変更できます
     function change(){
         var temp_array = current_mino.getMaterials();
         for(var i=0;i<4;i++){
@@ -198,10 +199,12 @@
                     }
                     if(mat.getX() == m_mate.getX()+1 && mat.getY() == m_mate.getY()){
                         movable_num[1] = 1;
+                        alert("a");
                     }else if(mat.getX() == m_mate.getX()-1 && mat.getY() == m_mate.getY()){
                         movable_num[1] = -1;
                     }else{
-                        movable_num[1] = 0;
+                      //  alert("test")
+                      //  movable_num[1] = 0;
                     }
                 }
             }
@@ -214,6 +217,7 @@
 
         //左に動くよ
         this.left = function(){
+            this.hit();
             if(movable_num[1] == -1)return 0;
             movable_num[1] = 0;
             left_position--;
@@ -226,6 +230,7 @@
 
         //右に動くよ
         this.right = function(){
+            this.hit();
             if(movable_num[1] == 1)return 0;
             movable_num[1] = 0;
             left_position++;
