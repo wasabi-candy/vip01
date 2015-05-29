@@ -54,6 +54,8 @@
             current_mino.down();
         }else if(e.keyCode == "32"){
             //スペース押したとき
+        }else if(e.keyCode == "65"){
+            change();
         }
     }
 
@@ -131,6 +133,16 @@
                 new_flag = true;
             }
         }
+    }
+
+    function change(){
+        var temp_array = current_mino.getMaterials();
+        for(var i=0;i<4;i++){
+            tetris.removeChild(temp_array[i].getObj());
+            delete temp_array[i];
+        }
+        new_flag = false;
+        current_mino = new Mino(counter);
     }
 
 
