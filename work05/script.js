@@ -282,7 +282,7 @@
                 }else if(mino_materials[i].getX() >= 19){
                     movable_num[1] = 1;
                 }
-                if(mino_materials[i].getY() > 28){
+                if(mino_materials[i].getY() > 10){
                     movable_num[0] = 1;
                 }
             }
