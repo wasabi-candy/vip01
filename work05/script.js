@@ -199,7 +199,6 @@
                     }
                     if(mat.getX() == m_mate.getX()+1 && mat.getY() == m_mate.getY()){
                         movable_num[1] = 1;
-                        alert("a");
                     }else if(mat.getX() == m_mate.getX()-1 && mat.getY() == m_mate.getY()){
                         movable_num[1] = -1;
                     }else{
