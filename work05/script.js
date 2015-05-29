@@ -52,6 +52,8 @@
             current_mino.right();
         }else if(e.keyCode == "40"){
             current_mino.down();
+        }else if(e.keyCode == "32"){
+            //スペース押したとき
         }
     }
 
@@ -292,10 +294,12 @@
     //ミノを作る一番小さなブロックのクラス
     function Material(){
         var mat;
+        var d_line;
         var x;
         var y;
         var d_flag = false;
         (function(){
+            d_line = 0;
             var style = "position:absolute;height:18px;width:18px;border:solid 1px black;float:left;";
             mat = document.createElement("div");
             mat.setAttribute("style",style);
@@ -321,13 +325,15 @@
         }
         this.drop_flag = function(){
             d_flag = true;
+            d_line++;
         }
         this.drop = function(){
             if(d_flag){
                 d_flag = false;
-                y++;
+                y+=d_line;
                 mat.style.marginTop = (y*20)+"px";
             }
+            d_line = 0;
         }
     }
 
