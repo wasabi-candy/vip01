@@ -5,5 +5,10 @@ window.onload = function(){
     ele.setAttribute("height","500px");
     var ctx = ele.getContext("2d");
     ctx.beginPath();
-    ctx.fillRect(10,10,10,10);
+
+    var i=10;
+    setInterval(function(){
+        i++;
+        ctx.fillRect(i,10,10,10);
+    },10);
 }
