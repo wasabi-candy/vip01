@@ -19,33 +19,46 @@
 
     //関数クラス
     function Fnc(fnc){
-        var power = 50;
+        var power = 60;
         var color = "#000";
         var start = -width/2;
         var end = width/2;
         var y = new Array(width);
-        var i = 0;
-        for(var x = start/power;x<=end/power;x+=1/power){
-            y[i] = fnc(x)*power;
-            i++;
-        }
-
         var old_point = Array(2);
+        var d = true;
+
+
+        this.calc = function(){
+            var i = 0;
+            for(var x = start/power;x<=end/power;x+=1/power){
+                y[i] = fnc(x)*power;
+                i++;
+            }
+        }
         this.draw = function(){
             for(var i=0;i<=width;i++){
                 if(i != 0){
-                    ctx.beginPath();
-                    ctx.moveTo(i-1,-y[i-1]+height/2);
-                    ctx.lineTo(i,-y[i]+height/2);
-                    ctx.stroke();
+                    if(disc((i+start)/power)){
+                        ctx.beginPath();
+                        ctx.moveTo(i-1,-y[i-1]+height/2);
+                        ctx.lineTo(i,-y[i]+height/2);
+                        ctx.stroke();
+                    }
                 }
             }
-
         }
-
         this.setColor = function(c){
             ctx.strokeStyle = c;
         }
+        this.setCondition = function(dd){
+            d = dd;
+        }
+        function disc(x){
+            return eval(d);
+        }
+
+        this.calc();
+
     }
 
     window.onload = function(){
@@ -65,17 +78,17 @@
 
 
         var obj = new Fnc(test1);
+        obj.setCondition("Math.abs(x)<=0.8");
         obj.setColor("#F00");
         obj.draw();
         var obj = new Fnc(test2);
+        obj.setCondition("Math.abs(x)<=2.3");
         obj.setColor("#0F0");
         obj.draw();
         var obj = new Fnc(test3);
+        obj.setCondition("Math.abs(x)>0.8");
         obj.setColor("#00F");
         obj.draw();
-
-
-
     }
 
 })(window.innerWidth,window.innerHeight);
