@@ -1,16 +1,49 @@
-(function(){
-    function test(x){
+(function(width,height){
+    //関数
+    var test1 = function(x){
         return x*x/10;
+    }
+    var test2 = function(x){
+        return x*2;
+    }
+    var test3 = function(x){
+        return Math.cos(x/50)*50;
+    }
+
+
+    //関数クラス
+    function Fnc(fnc){
+        var color = "#000";
+        var gap = -width/2;
+        var y = new Array(width);
+        for(var i = 0;i<=width;i++){
+            y[i] = fnc(i+gap);
+        }
+
+        var old_point = Array(2);
+        this.draw = function(){
+            for(var i=0;i<=width;i++){
+                if(i != 0){
+                    ctx.beginPath();
+                    ctx.moveTo(i-1,-y[i-1]+height/2);
+                    ctx.lineTo(i,-y[i]+height/2);
+                    ctx.stroke();
+                }
+            }
+
+        }
+
+        this.setColor = function(c){
+            ctx.strokeStyle = c;
+        }
     }
 
     window.onload = function(){
-        var width = window.innerWidth;
-        var height = window.innerHeight;
 
         q.setAttribute("width",width+"px");
         q.setAttribute("height",height+"px");
 
-        var ctx = q.getContext("2d");
+        ctx = q.getContext("2d");
         ctx.lineWidth=0.5;
         ctx.beginPath();
         ctx.moveTo(width/2,0);
@@ -20,22 +53,22 @@
         ctx.stroke();
         ctx.lineWidth=1;
 
-        var old_point = Array(2);
-        var start = -width/2;
-        for(var x=start;x<=width;x++){
-            if(x != start){
-                ctx.beginPath();
-                ctx.moveTo(old_point[0]+width/2,-1*old_point[1]+(height/2));
-                ctx.lineTo(x+width/2,-1*test(x)+(height/2));
-                ctx.stroke();
-            }
 
-            old_point[0] = x;
-            old_point[1] = test(x);
-        }
+        var obj = new Fnc(test1);
+        obj.setColor("#F00");
+        obj.draw();
+        var obj = new Fnc(test2);
+        obj.setColor("#0F0");
+        obj.draw();
+        var obj = new Fnc(test3);
+        obj.setColor("#00F");
+        obj.draw();
+
+
+
     }
 
-})();
+})(window.innerWidth,window.innerHeight);
 
 
 
