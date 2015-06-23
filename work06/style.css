@@ -4,6 +4,12 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
 }
-#c{
+html,body{
+    margin:0px;
+    padding:0px;
+}
+#q{
     background:#eee;
+    margin:0px;
+    padding:0px;
 }
