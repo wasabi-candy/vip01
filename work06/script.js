@@ -1,18 +1,25 @@
 (function(width,height){
+    function sin(x){return Math.sin(x)}
+    function cos(x){return Math.cos(x)}
+    function tan(x){return Math.tan(x)}
+    function pow(x,n){return Math.pow(x,4)}
+    function abs(x){return Math.abs(x)}
+
     //関数
     var test1 = function(x){
-        return x*x/10;
+        return pow(x,4)+pow(x,2)+6;
     }
     var test2 = function(x){
-        return x*2;
+        return 1/2*cos(2*x)+7/2;
     }
     var test3 = function(x){
-        return Math.cos(x/50)*50;
+        return 12/(abs(x)+1);
     }
 
 
     //関数クラス
     function Fnc(fnc){
+        var power = 50;
         var color = "#000";
         var gap = -width/2;
         var y = new Array(width);
@@ -25,8 +32,8 @@
             for(var i=0;i<=width;i++){
                 if(i != 0){
                     ctx.beginPath();
-                    ctx.moveTo(i-1,-y[i-1]+height/2);
-                    ctx.lineTo(i,-y[i]+height/2);
+                    ctx.moveTo((i-1+gap-gap/power)*power,(-y[i-1]*power)+height/2);
+                    ctx.lineTo((i+gap-gap/power)*power,(-y[i]*power)+height/2);
                     ctx.stroke();
                 }
             }
