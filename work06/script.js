@@ -1,23 +1,44 @@
-window.onload = function(){
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+(function(){
+    function test(x){
+        return x*x/10;
+    }
 
-    q.setAttribute("width",width+"px");
-    q.setAttribute("height",height+"px");
+    window.onload = function(){
+        var width = window.innerWidth;
+        var height = window.innerHeight;
 
-    var ctx = q.getContext("2d");
-    ctx.beginPath();
+        q.setAttribute("width",width+"px");
+        q.setAttribute("height",height+"px");
+
+        var ctx = q.getContext("2d");
+        ctx.lineWidth=0.5;
+        ctx.beginPath();
+        ctx.moveTo(width/2,0);
+        ctx.lineTo(width/2,height);
+        ctx.moveTo(0,height/2);
+        ctx.lineTo(width,height/2);
+        ctx.stroke();
+        ctx.lineWidth=1;
+
+        var old_point = Array(2);
+        var start = -width/2;
+        for(var x=start;x<=width;x++){
+            if(x != start){
+                ctx.beginPath();
+                ctx.moveTo(old_point[0]+width/2,-1*old_point[1]+(height/2));
+                ctx.lineTo(x+width/2,-1*test(x)+(height/2));
+                ctx.stroke();
+            }
+
+            old_point[0] = x;
+            old_point[1] = test(x);
+        }
+    }
+
+})();
 
 
-    var i=10;
-    setInterval(function(){
-        i++;
-        ctx.fillStyle = "#eee";
-        ctx.fillRect(0,0,width,height);
-        ctx.fillStyle = "#000";
-        ctx.fillRect(i,10,10,10);
-    },10);
-}
+
 
 
 /*
