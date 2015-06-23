@@ -21,11 +21,15 @@ var width = q.width = s.width;
 var height = q.height = s.height;
 
 var letters = Array(256).join(1).split('');
+var i=0;
+
+function rand(){return Math.floor(Math.random()*16);}
+function color(){return "#"+rand().toString(16)+rand().toString(16)+rand().toString(16);}
 
 var draw = function () {
     q.getContext('2d').fillStyle = 'rgba(0,0,0,0.1)';
     q.getContext('2d').fillRect(0,0,width,height);
-    q.getContext('2d').fillStyle = '#0F0';
+    q.getContext('2d').fillStyle = color();
 
     letters.map(function(y_pos, index){
         text = String.fromCharCode(49+Math.random()*9);
