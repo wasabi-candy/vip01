@@ -23,8 +23,20 @@ var height = q.height = s.height;
 var letters = Array(256).join(1).split('');
 var i=0;
 
+
 function rand(){return Math.floor(Math.random()*16);}
-function color(){return "#"+rand().toString(16)+rand().toString(16)+rand().toString(16);}
+function up(i){n[i]>=16?f[i]=false:n[i]++;}
+function down(i){n[i]<=0?f[i]=true:n[i]--;}
+
+var n = [rand(),rand(),rand()];
+var f = [false,false,false];
+
+function color(){
+    for(var i=0;i<3;i++){
+        f[i]?up(i):down(i);
+    }
+    return "#"+n[0].toString(16)+n[1].toString(16)+n[2].toString(16);
+}
 
 var draw = function () {
     q.getContext('2d').fillStyle = 'rgba(0,0,0,0.1)';
