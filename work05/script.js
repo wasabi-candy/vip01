@@ -180,6 +180,7 @@
         this.fall = function(){
             movable_num[0] = 0;
             movable_num[1] = 0;
+            if(movable_num[0] == 1)return 0;
             top_position++;
             for(var i=0;i<4;i++){
                 var temp = mino_materials[i];
@@ -285,6 +286,7 @@
 
                 }
             }
+            //はみ出たブロックを押し込める
             if(f == -1){
                 this.right();
             }else if(f == 1){
@@ -300,7 +302,7 @@
                 }else if(mino_materials[i].getX() >= 19){
                     movable_num[1] = 1;
                 }
-                if(mino_materials[i].getY() > 10){
+                if(mino_materials[i].getY() > 28){
                     movable_num[0] = 1;
                 }
             }
