@@ -21,10 +21,13 @@
     function Fnc(fnc){
         var power = 50;
         var color = "#000";
-        var gap = -width/2;
+        var start = -width/2;
+        var end = width/2;
         var y = new Array(width);
-        for(var i = 0;i<=width;i++){
-            y[i] = fnc(i+gap);
+        var i = 0;
+        for(var x = start/power;x<=end/power;x+=1/power){
+            y[i] = fnc(x)*power;
+            i++;
         }
 
         var old_point = Array(2);
@@ -32,8 +35,8 @@
             for(var i=0;i<=width;i++){
                 if(i != 0){
                     ctx.beginPath();
-                    ctx.moveTo((i-1+gap-gap/power)*power,(-y[i-1]*power)+height/2);
-                    ctx.lineTo((i+gap-gap/power)*power,(-y[i]*power)+height/2);
+                    ctx.moveTo(i-1,-y[i-1]+height/2);
+                    ctx.lineTo(i,-y[i]+height/2);
                     ctx.stroke();
                 }
             }
