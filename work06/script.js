@@ -44,10 +44,12 @@ var draw = function () {
     q.getContext('2d').fillStyle = color();
 
     letters.map(function(y_pos, index){
-        text = String.fromCharCode(49+Math.random()*9);
+        text = String.fromCharCode(49+Math.random(i)*9);
         x_pos = index * 10;
         q.getContext('2d').fillText(text, x_pos, y_pos);
-        letters[index] = (y_pos > 758 + Math.random() * 1e4) ? 0 : y_pos + 10;
+        letters[index] = (y_pos > 758 + Math.random() * 1e4) ? 0 : y_pos + 20;
     });
 };
+
+q.getContext('2d').font="20px ''";
 setInterval(draw, 33);
