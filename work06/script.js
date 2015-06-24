@@ -7,26 +7,22 @@
 
     //関数
     var test1 = function(x){
-        return pow(x,4)+pow(x,2)+6;
-    }
-    var test2 = function(x){
-        return 1/2*cos(2*x)+7/2;
-    }
-    var test3 = function(x){
-        return 12/(abs(x)+1);
+        return x*x/10;
     }
 
 
-    //関数クラス
+    //関数の座標・描画を管理するクラス
     function Fnc(fnc){
-        var power = 60;
+        var power = 20;
         var color = "#000";
         var start = -width/2;
         var end = width/2;
         var y = new Array(width);
         var old_point = Array(2);
         var d = true;
-
+        var type = "2";
+        var yoko = 0;
+        var tete = 0;
 
         this.calc = function(){
             var i = 0;
@@ -53,12 +49,18 @@
         this.setCondition = function(dd){
             d = dd;
         }
+        this.left = function(){
+            alert("left");
+        }
+        this.right = function(){
+            alert("right");
+        }
         function disc(x){
             return eval(d);
         }
 
-        this.calc();
 
+        this.calc();
     }
 
     window.onload = function(){
@@ -78,17 +80,27 @@
 
 
         var obj = new Fnc(test1);
-        obj.setCondition("Math.abs(x)<=0.8");
         obj.setColor("#F00");
         obj.draw();
-        var obj = new Fnc(test2);
-        obj.setCondition("Math.abs(x)<=2.3");
-        obj.setColor("#0F0");
-        obj.draw();
-        var obj = new Fnc(test3);
-        obj.setCondition("Math.abs(x)>0.8");
-        obj.setColor("#00F");
-        obj.draw();
+
+        document.onkeydown = function(e){
+            if(e.keyCode == "38"){
+                //up
+            }else if(e.keyCode == "37"){
+                obj.left();
+            }else if(e.keyCode == "39"){
+                obj.right();
+            }else if(e.keyCode == "40"){
+                //down
+            }else if(e.keyCode == "32"){
+                //space
+            }else if(e.keyCode == "65"){
+                //??
+            }
+
+        }
+
+
     }
 
 })(window.innerWidth,window.innerHeight);
