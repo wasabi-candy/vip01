@@ -1,5 +1,5 @@
 (function(width,height){
-    var g;
+    var g = new Array();
     function Graph(n){
         var x = y = 100;
         var w = h = 500;
@@ -16,7 +16,7 @@
 
         var conf_window = document.createElement("div");
         conf_window.id = "c"+n;
-        conf_window.innerHTML = "<div>要素名：<input type='text' /><br />数値：<input type='text' /><br><input type='button' value='追加'id='f"+self_number+"'/></div>";
+        conf_window.innerHTML = "<div>要素名：<input type='text' id='v"+self_number+"'/><br />数値：<input type='text'id='n"+self_number+"' /><br><input type='button' value='追加'id='f"+self_number+"'/></div>";
         //var form = conf_window.getElementById("f"+self_number);
 
         this.draw = function(){
@@ -56,6 +56,7 @@
 
         }
         this.addElement = function(ele,num){
+            if(num=="")return 0;
             if(index < 8){
                 element[index] = ele;
                 ele_num[index] = num;
@@ -89,10 +90,14 @@
                 if(!openflag){
                     body.appendChild(conf_window);
                     var ff = document.getElementById("f"+self_number);
-                    ff.onclick = function(){
-                        g.addElement("",10);
-                        g.draw();
-                    }
+                        ff.onclick = function(){
+                            var val = document.getElementById("v"+self_number).value;
+                            var num = document.getElementById("n"+self_number).value;
+                            g[self_number].addElement("val",Number(num));
+                            g[self_number].draw();
+                            document.getElementById("v"+self_number).value="";
+                            document.getElementById("n"+self_number).value="";
+                        }
                     openflag = true;
                 }else{
                     body.removeChild(conf_window);
@@ -117,8 +122,8 @@
         }
         init();
 
-        g = new Graph(0);
-        g.draw();
+        g[0] = new Graph(0);
+        g[0].draw();
 
     }
 })(window.innerWidth,window.innerHeight);
