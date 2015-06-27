@@ -4,58 +4,96 @@
     function tan(x){return Math.tan(x)}
     function pow(x,n){return Math.pow(x,4)}
     function abs(x){return Math.abs(x)}
+    function sqt(x){return Math.sqrt(x)}
 
     //関数
-    var test1 = function(x){
-        return x*x/10;
-    }
-
+    var test1 = function(x,y){return 100*sin(x/50)+100*sin(y/50)}
 
     //関数の座標・描画を管理するクラス
     function Fnc(fnc){
-        var power = 20;
+        var power =1;
         var color = "#000";
         var start = -width/2;
         var end = width/2;
         var y = new Array(width);
         var old_point = Array(2);
         var d = true;
-        var type = "2";
         var yoko = 0;
-        var tete = 0;
+        var tate = 0;
+        var z_axis = Math.floor(fnc.toString().split(",").length==1?0:width);
+        var y_ary = new Array(z_axis);
 
         this.calc = function(){
-            var i = 0;
-            for(var x = start/power;x<=end/power;x+=1/power){
-                y[i] = fnc(x)*power;
-                i++;
+            var iz = 0;
+            for(var z=start/power;z<=end/power;z+=1/power){
+                var i = 0;
+                for(var x = start/power;x<=end/power;x+=1/power){
+                    if(z_axis==0){
+                        y[i] = fnc(x)*power;
+                    }else{
+                        y[i] = fnc(x,z)*power
+                    }
+                    i++;
+                }
+                if(z_axis!=0)y_ary[iz] = y.concat();
+                iz++;
             }
         }
         this.draw = function(){
-            for(var i=0;i<=width;i++){
-                if(i != 0){
-                    if(disc((i+start)/power)){
+            ctx.strokeStyle = color;
+            var ox,oy;
+            for(var z=0;z<=z_axis;z+=15){
+                for(var i=0;i<=width;i+=15){
+                    if(disc((i+start)/power,(z+start)/power)){
+                        var yy = y_ary[z][i];
+                        var nzx = sin(yoko)*(z+start);
+                        var nzy = sin(tate)*(z+start);
+
+                        var nx = (i+start)*cos(yoko)+nzx-start;
+                        var ny = -yy*cos(tate)+nzy+height/2;
+
                         ctx.beginPath();
-                        ctx.moveTo(i-1,-y[i-1]+height/2);
-                        ctx.lineTo(i,-y[i]+height/2);
+                        ctx.strokeStyle="#"+(Math.floor(16-16*ny/width).toString(16))+"3"+(Math.floor(16*ny/width).toString(16));
+                       // ctx.fillRect(ox,oy,2,2);
+                        ctx.moveTo(ox,oy);
+                        ctx.lineTo(nx,ny);
                         ctx.stroke();
+                        ox = nx;
+                        oy = ny;
+
+                    }else if(!disc(i+start/power,(i+start)/power)){
+                        ctx.strokeStyle="#0ff";
+                        ox = ((i+start)*cos(yoko))+nzx-start;
+                        oy = (-y_ary[z][i])*cos(tate)+nzy+height/2;
+                        ctx.strokeStyle=color;
                     }
                 }
             }
+            ctx.strokeStyle = "#000";
         }
         this.setColor = function(c){
-            ctx.strokeStyle = c;
+            color = c;
         }
         this.setCondition = function(dd){
             d = dd;
         }
         this.left = function(){
-            alert("left");
+            yoko+=0.01;
+            this.draw();
         }
         this.right = function(){
-            alert("right");
+            yoko-=0.01;
+            this.draw();
         }
-        function disc(x){
+        this.up = function(){
+            tate += 0.08;
+            this.draw();
+        }
+        this.down = function(){
+            tate -= 0.08;
+            this.draw();
+        }
+        function disc(x,z){
             return eval(d);
         }
 
@@ -67,42 +105,50 @@
 
         q.setAttribute("width",width+"px");
         q.setAttribute("height",height+"px");
-
         ctx = q.getContext("2d");
-        ctx.lineWidth=0.5;
-        ctx.beginPath();
-        ctx.moveTo(width/2,0);
-        ctx.lineTo(width/2,height);
-        ctx.moveTo(0,height/2);
-        ctx.lineTo(width,height/2);
-        ctx.stroke();
-        ctx.lineWidth=1;
+        function init(){
+            ctx.fillStyle="#eee";
+            ctx.fillRect(0,0,width,height);
+            ctx.strokeStyle="#000";
+            ctx.lineWidth=0.5;
+            ctx.beginPath();
+            ctx.moveTo(width/2,0);
+            ctx.lineTo(width/2,height);
+            ctx.moveTo(0,height/2);
+            ctx.lineTo(width,height/2);
+            ctx.stroke();
+            ctx.lineWidth=1;
+            ctx.fillStyle="#000";
+        }
+        init();
 
 
-        var obj = new Fnc(test1);
-        obj.setColor("#F00");
-        obj.draw();
+        var obj_ary = [
+            new Fnc(test1)
+            ];
+        obj_ary[0].setColor("#F00");
+        obj_ary[0].setCondition("abs(x)<250 && abs(z)<250");
+        obj_ary[0].draw();
 
+        /*
         document.onkeydown = function(e){
             if(e.keyCode == "38"){
-                //up
+                init();
+                for(var i=0;i<obj_ary.length;i++)obj_ary[i].up();
             }else if(e.keyCode == "37"){
-                obj.left();
+                init();
+                for(var i=0;i<obj_ary.length;i++)obj_ary[i].left();
             }else if(e.keyCode == "39"){
-                obj.right();
+                init();
+                for(var i=0;i<obj_ary.length;i++)obj_ary[i].right();
             }else if(e.keyCode == "40"){
-                //down
-            }else if(e.keyCode == "32"){
-                //space
-            }else if(e.keyCode == "65"){
-                //??
+                init();
+                for(var i=0;i<obj_ary.length;i++)obj_ary[i].down();
             }
-
         }
-
-
+        */
+        setInterval(function(){init();obj_ary[0].left()},1);
     }
-
 })(window.innerWidth,window.innerHeight);
 
 
