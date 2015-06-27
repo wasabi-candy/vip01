@@ -55,9 +55,15 @@
             ctx.stroke();
 
         }
+        function isNumber(x){
+            if( typeof(x) != 'number' && typeof(x) != 'string' )
+                return false;
+            else
+                return (x == parseFloat(x) && isFinite(x));
+        }
         this.addElement = function(ele,num){
-            if(num=="")return 0;
-            if(ele==0)return 0;
+            if(!isNumber(num))return 0;
+            if(ele=="")return 0;
             if(index < 8){
                 element[index] = ele;
                 ele_num[index] = num;
@@ -66,7 +72,7 @@
                 for(var i=0;i<index;i++){
                     str+= "<div style='width:100%;height:40px;padding-top:10px;'>";
                     str+= "<div style='width:30px;height:30px;background:"+color[i]+";float:left;margin:0 15px;'></div>"
-                    str+= "<div style='color:"+color[i]+";padding-top:6px;padding-left:20px;width:200px;'>"+element[i]+"</div></div>";
+                        str+= "<div style='color:"+color[i]+";padding-top:6px;padding-left:20px;width:200px;'>"+element[i]+"</div></div>";
                 }
                 document.getElementById("t0").innerHTML = str;
                 this.setWindow();
@@ -98,14 +104,14 @@
                 if(!openflag){
                     body.appendChild(conf_window);
                     var ff = document.getElementById("f"+self_number);
-                        ff.onclick = function(){
-                            var val = document.getElementById("v"+self_number).value;
-                            var num = document.getElementById("n"+self_number).value;
-                            g[self_number].addElement(val,Number(num));
-                            g[self_number].draw();
-                            document.getElementById("v"+self_number).value="";
-                            document.getElementById("n"+self_number).value="";
-                        }
+                    ff.onclick = function(){
+                        var val = document.getElementById("v"+self_number).value;
+                        var num = document.getElementById("n"+self_number).value;
+                        g[self_number].addElement(val,Number(num));
+                        g[self_number].draw();
+                        document.getElementById("v"+self_number).value="";
+                        document.getElementById("n"+self_number).value="";
+                    }
                     openflag = true;
                 }else{
                     body.removeChild(conf_window);
