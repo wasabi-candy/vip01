@@ -9,24 +9,18 @@
         var ele_num = new Array();
         var self_number = n;
         var index = 0;
+        var conf_window = "<div id=c'"+self_number+"'></div>";
         var color = ["#123","#a43","#199","#911","#fd3"]
         var openflag = false;
-
-        var conf_window = document.createElement("div");
-        conf_window.id = "c"+n;
-        var style= "z-index:1;width:200px;height:100px;background:#ddd;position:absolute;margin-left:"+(x+w+1)+"px;margin-top:"+y+"px";
-        conf_window.setAttribute("style",style);
-        
 
         q.onclick = function(e){
             var cx = e.clientX;
             var cy = e.clientY;
             if(cx<bx+15 && cx>bx && cy<by+15 && cy>by){
                 if(!openflag){
-                    document.getElementsByTagName("body")[0].appendChild(conf_window);
+                    document.getElementsByTagName("body")[0].appendChild();
                     openflag = true;
                 }else{
-                    document.getElementsByTagName("body")[0].removeChild(conf_window);
                     openflag = false;
                 }
             }
@@ -86,7 +80,6 @@
     window.onload = function(){
         q.setAttribute("width",width+"px");
         q.setAttribute("height",height+"px");
-        q.setAttribute("style","position:absolute;");
         ctx = q.getContext("2d");
         function init(){
             ctx.fillStyle="#eee";
