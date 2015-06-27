@@ -69,9 +69,11 @@
                 ele_num[index] = num;
                 index++;
                 var str = "";
+                var sum = 0;
+                for(var i=0;i<index;i++)sum+=Number(ele_num[i]);
                 for(var i=0;i<index;i++){
                     str+= "<div style='width:100%;height:40px;padding-top:10px;'>";
-                    str+= "<div style='width:30px;height:30px;background:"+color[i]+";float:left;margin:0 15px;'></div>"
+                    str+= "<div style='text-align:center;padding-top:6px;width:30px;height:24px;background:"+color[i]+";float:left;margin:0 15px;'>"+(Math.floor(100*ele_num[i]/sum))+"%</div>"
                         str+= "<div style='color:"+color[i]+";padding-top:6px;padding-left:20px;width:200px;'>"+element[i]+"</div></div>";
                 }
                 document.getElementById("t0").innerHTML = str;
