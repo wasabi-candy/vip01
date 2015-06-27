@@ -8,15 +8,14 @@
 
 
         //位置
-        var x=width/2;
-        var y=height/2;
+        var x=Math.floor(Math.random()*width);
+        var y=Math.floor(Math.random()*height);
         var face = "(´・ω・`)";
         var back = -1;
 
         this.draw = function(){
-            ctx.fillStyle="#333";//"#"+parseInt(gene,2).toString("16");
+            ctx.fillStyle="#"+parseInt(gene,2).toString("16");
             ctx.fillText(face,x,y);
-            ctx.fillText("＼山田です／",x-10,y-20);
         }
         this.walk = function(){
             var front;
@@ -49,10 +48,10 @@
         }
         init();
 
-        life_array[0] = new Life();
+        for(var i=0;i<10;i++){life_array[i] = new Life()};
         setInterval(function(){
             init();
-            life_array[0].walk();
+            for(var i=0;i<life_array.length;i++)life_array[i].walk();
         },50);
     }
 
