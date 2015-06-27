@@ -1,7 +1,9 @@
 (function(width,height){
-    function Grapha(n){
+    function Graph(n){
         var x,y,w,h;
-        var index = n;
+        var front_num = n;
+        var element = new Array();
+        var index = 0;
         (function(){
             x = 100;
             y = 100;
@@ -10,9 +12,25 @@
         })();
 
         this.draw = function(){
-            ctx.fillStyle="#3d3";
+            ctx.fillStyle="#ddd";
             ctx.fillRect(x,y,w,h);
             ctx.fillStyle="#000";
+            ctx.beginPath();
+            ctx.moveTo(x+w/2,y+h/2);
+            ctx.arc(x+w/2, y+h/2, w/2, -90*Math.PI/180, 60*Math.PI/180, false);
+            ctx.closePath();
+            ctx.fillStyle = '#FFCEBE';
+            ctx.fill();
+
+        }
+        this.addElement = function(ele){
+            element[index] = ele;
+            index++;
+        }
+        this.removeElement = function(i){
+            //要素の削除
+        }
+        this.createGraph = function(){
         }
 
     }
@@ -29,7 +47,7 @@
         }
         init();
 
-        var g = new Grapha(0);
+        var g = new Graph(0);
         g.draw();
     }
 })(window.innerWidth,window.innerHeight);
