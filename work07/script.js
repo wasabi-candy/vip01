@@ -9,6 +9,11 @@
             h = 300;
         })();
 
+        this.draw = function(){
+            ctx.fillStyle="#3d3";
+            ctx.fillRect(x,y,w,h);
+            ctx.fillStyle="#000";
+        }
 
     }
     window.onload = function(){
@@ -23,5 +28,8 @@
             ctx.fillText("グラフ作るよ！",10,30);
         }
         init();
+
+        var g = new Grapha(0);
+        g.draw();
     }
 })(window.innerWidth,window.innerHeight);
