@@ -140,6 +140,8 @@
 
         g[0] = new Graph(0);
         g[0].draw();
+        g[1] = new Graph(0);
+        g[1].draw();
 
     }
 })(window.innerWidth,window.innerHeight);
