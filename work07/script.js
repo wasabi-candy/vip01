@@ -57,6 +57,7 @@
         }
         this.addElement = function(ele,num){
             if(num=="")return 0;
+            if(ele==0)return 0;
             if(index < 8){
                 element[index] = ele;
                 ele_num[index] = num;
