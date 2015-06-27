@@ -78,11 +78,11 @@
             d = dd;
         }
         this.left = function(){
-            yoko+=0.01;
+            yoko+=0.08;
             this.draw();
         }
         this.right = function(){
-            yoko-=0.01;
+            yoko-=0.08;
             this.draw();
         }
         this.up = function(){
@@ -130,7 +130,6 @@
         obj_ary[0].setCondition("abs(x)<250 && abs(z)<250");
         obj_ary[0].draw();
 
-        /*
         document.onkeydown = function(e){
             if(e.keyCode == "38"){
                 init();
@@ -146,8 +145,8 @@
                 for(var i=0;i<obj_ary.length;i++)obj_ary[i].down();
             }
         }
-        */
-        setInterval(function(){init();obj_ary[0].left()},1);
+        
+        //setInterval(function(){init();obj_ary[0].left()},1);
     }
 })(window.innerWidth,window.innerHeight);
 
