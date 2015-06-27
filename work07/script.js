@@ -9,28 +9,11 @@
         var ele_num = new Array();
         var self_number = n;
         var index = 0;
-        var color = ["#123","#a43","#199","#911","#fd3"]
+        var color = ["#123","#a43","#199","#911","#fd3"];
         var openflag = false;
 
         var conf_window = document.createElement("div");
         conf_window.id = "c"+n;
-        var style= "z-index:1;width:200px;height:100px;background:#ddd;position:absolute;margin-left:"+(x+w+1)+"px;margin-top:"+y+"px";
-        conf_window.setAttribute("style",style);
-        
-
-        q.onclick = function(e){
-            var cx = e.clientX;
-            var cy = e.clientY;
-            if(cx<bx+15 && cx>bx && cy<by+15 && cy>by){
-                if(!openflag){
-                    document.getElementsByTagName("body")[0].appendChild(conf_window);
-                    openflag = true;
-                }else{
-                    document.getElementsByTagName("body")[0].removeChild(conf_window);
-                    openflag = false;
-                }
-            }
-        }
 
         this.draw = function(){
             var sum = 0;
@@ -72,6 +55,7 @@
             element[index] = ele;
             ele_num[index] = num;
             index++;
+            this.setWindow();
         }
         this.removeElement = function(i){
             //要素の削除
@@ -81,6 +65,29 @@
         this.open = function(){
 
         }
+        this.setWindow = function(){
+            style = "z-index:1;width:200px;height:"+(index*100)+"px;background:#ddd;";
+            style+= "position:absolute;margin-left:"+(x+w+1)+"px;margin-top:"+y+"px;";
+            style+= "";
+            conf_window.setAttribute("style",style);
+        }
+        this.setWindow();
+
+        q.onclick = function(e){
+            var cx = e.clientX;
+            var cy = e.clientY;
+            if(cx<bx+15 && cx>bx && cy<by+15 && cy>by){
+                if(!openflag){
+                    document.getElementsByTagName("body")[0].appendChild(conf_window);
+                    openflag = true;
+                }else{
+                    document.getElementsByTagName("body")[0].removeChild(conf_window);
+                    openflag = false;
+                }
+            }
+        }
+
+
 
     }
     window.onload = function(){
@@ -98,6 +105,8 @@
         init();
 
         var g = new Graph(0);
+        g.addElement("test",10);
+        g.addElement("test",30);
         g.draw();
     }
 })(window.innerWidth,window.innerHeight);
