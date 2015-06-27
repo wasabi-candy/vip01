@@ -22,14 +22,14 @@
             var angle,old_angle;
             for(var i=0;i<index;i++){
                 if(i==0){
-                    angle = -90;
                     old_angle = -90;
+                    angle = 360*(ele_num[i]/sum)-90;
                 }
-                angle += 360*(ele_num[i]/sum);
+
                 ctx.fillStyle=color[i];
                 ctx.beginPath();
                 ctx.moveTo(x+w/2,y+h/2);
-                ctx.arc(x+w/2, y+h/2, w/2, old_angle*Math.PI/180, angle*Math.PI/180, false);
+                ctx.arc(x+w/2, y+h/2, w/2, old_temp*Math.PI/180, temp*Math.PI/180, false);
                 ctx.closePath();
                 ctx.fill();
 
@@ -64,8 +64,7 @@
 
         var g = new Graph(0);
         g.addElement("",10);
-        g.addElement("",20);
-        g.addElement("",14);
+        g.addElement("",10);
         g.draw();
     }
 })(window.innerWidth,window.innerHeight);
