@@ -16,7 +16,7 @@
 
         var conf_window = document.createElement("div");
         conf_window.id = "c"+n;
-        conf_window.innerHTML = "<div>要素名：<input type='text' id='v"+self_number+"'/><br />数値：<input type='text'id='n"+self_number+"' /><br><input type='button' value='追加'id='f"+self_number+"'/></div>";
+        conf_window.innerHTML = "<div>要素名：<input type='text' id='v"+self_number+"'/><br />数値：<input type='text'id='n"+self_number+"' /><br><input type='button' value='追加'id='f"+self_number+"'/></div><div id='t"+self_number+"'>";
         //var form = conf_window.getElementById("f"+self_number);
 
         this.draw = function(){
@@ -61,6 +61,13 @@
                 element[index] = ele;
                 ele_num[index] = num;
                 index++;
+                var str = "";
+                for(var i=0;i<index;i++){
+                    str+= "<div style='width:100%;height:40px;padding-top:10px;'>";
+                    str+= "<div style='width:30px;height:30px;background:"+color[i]+";float:left;margin:0 15px;'></div>"
+                    str+= "<div style='color:"+color[i]+";padding-top:6px;padding-left:20px;width:200px;'>"+element[i]+"</div></div>";
+                }
+                document.getElementById("t0").innerHTML = str;
                 this.setWindow();
             }else{
                 alert("もうだめ");
@@ -93,7 +100,7 @@
                         ff.onclick = function(){
                             var val = document.getElementById("v"+self_number).value;
                             var num = document.getElementById("n"+self_number).value;
-                            g[self_number].addElement("val",Number(num));
+                            g[self_number].addElement(val,Number(num));
                             g[self_number].draw();
                             document.getElementById("v"+self_number).value="";
                             document.getElementById("n"+self_number).value="";
