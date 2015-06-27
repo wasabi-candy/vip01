@@ -1,4 +1,5 @@
 (function(width,height){
+    var g;
     function Graph(n){
         var x = y = 100;
         var w = h = 500;
@@ -9,13 +10,14 @@
         var ele_num = new Array();
         var self_number = n;
         var index = 0;
-        var color = ["#123","#a43","#199","#911","#fd3"];
+        var color = ["#a43","#199","#911","#fd3","#ead","#59d","#12d","#3d3"];
         var openflag = false;
+        var text_list = "";
 
         var conf_window = document.createElement("div");
         conf_window.id = "c"+n;
-        var form = "<div>要素名：<input type='text' /><br />数値：<input type='text' /><br><input type='button' /></div>";
-        conf_window.innerHTML = form;
+        conf_window.innerHTML = "<div>要素名：<input type='text' /><br />数値：<input type='text' /><br><input type='button' value='追加'id='f"+self_number+"'/></div>";
+        //var form = conf_window.getElementById("f"+self_number);
 
         this.draw = function(){
             var sum = 0;
@@ -54,10 +56,14 @@
 
         }
         this.addElement = function(ele,num){
-            element[index] = ele;
-            ele_num[index] = num;
-            index++;
-            this.setWindow();
+            if(index < 8){
+                element[index] = ele;
+                ele_num[index] = num;
+                index++;
+                this.setWindow();
+            }else{
+                alert("もうだめ");
+            }
         }
         this.removeElement = function(i){
             //要素の削除
@@ -82,6 +88,11 @@
             if(cx<bx+15 && cx>bx && cy<by+15 && cy>by){
                 if(!openflag){
                     body.appendChild(conf_window);
+                    var ff = document.getElementById("f"+self_number);
+                    ff.onclick = function(){
+                        g.addElement("",10);
+                        g.draw();
+                    }
                     openflag = true;
                 }else{
                     body.removeChild(conf_window);
@@ -89,7 +100,6 @@
                 }
             }
         }
-
 
 
     }
@@ -107,7 +117,7 @@
         }
         init();
 
-        var g = new Graph(0);
+        g = new Graph(0);
         g.draw();
 
     }
