@@ -36,6 +36,18 @@
                 old_angle = angle;
             }
 
+            ctx.fillStyle = "#aaa";
+            ctx.fillRect(x+w-20,y+5,15,15);
+            ctx.strokeStyle = "#777";
+
+            ctx.beginPath();
+            ctx.moveTo(x+w-20+8,y+6);
+            ctx.lineTo(x+w-20+8,y+20);
+            ctx.moveTo(x+w-19,y+13);
+            ctx.lineTo(x+w-20+15,y+13);
+            ctx.closePath();
+            ctx.stroke();
+
         }
         this.addElement = function(ele,num){
             element[index] = ele;
@@ -63,9 +75,6 @@
         init();
 
         var g = new Graph(0);
-        g.addElement("",10);
-        g.addElement("",20);
-        g.addElement("",14);
         g.draw();
     }
 })(window.innerWidth,window.innerHeight);
