@@ -1,6 +1,15 @@
 (function(width,height){
-    function Grapha(){
+    function Grapha(n){
         var x,y,w,h;
+        var index = n;
+        (function(){
+            x = 100;
+            y = 100;
+            w = 300;
+            h = 300;
+        })();
+
+
     }
     window.onload = function(){
         q.setAttribute("width",width+"px");
